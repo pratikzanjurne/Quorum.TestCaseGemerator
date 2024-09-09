@@ -1,0 +1,68 @@
+﻿@*
+  This view sets up a simple flowchart using jsPlumb with drag-and-drop functionality.
+*@
+@{
+    ViewData["Title"] = "Flowchart";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- jsPlumb CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/css/jsplumbtoolkit-defaults.min.css" />
+    <!-- jsPlumb JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/jsplumb.min.js"></script>
+
+    <style>
+        #canvas {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+
+        .draggable {
+            width: 150px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            position: absolute;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas">
+        <div id="box1" class="draggable" style="left: 50px; top: 50px;">Box 1</div>
+        <div id="box2" class="draggable" style="left: 300px; top: 50px;">Box 2</div>
+        <div id="box3" class="draggable" style="left: 200px; top: 200px;">Box 3</div>
+    </div>
+
+    <script>
+        jsPlumb.ready(function () {
+            // Initialize jsPlumb instance
+            var instance = jsPlumb.getInstance({
+                Connector: "Bezier",
+                PaintStyle: { stroke: "#666", strokeWidth: 2 },
+                EndpointStyle: { fill: "#666", radius: 7 },
+                Endpoint: "Dot",
+                Anchor: "AutoDefault"
+            });
+
+            // Make the elements draggable
+            jsPlumb.draggable(['box1', 'box2', 'box3']);
+
+            // Connect the elements
+            instance.connect({ source: 'box1', target: 'box2' });
+            instance.connect({ source: 'box2', target: 'box3' });
+
+            // Optional: Add more event listeners or configuration here
+        });
+    </script>
+</body>
+</html>
