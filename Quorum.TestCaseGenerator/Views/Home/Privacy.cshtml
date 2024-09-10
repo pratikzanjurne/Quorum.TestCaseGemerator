@@ -31,7 +31,51 @@
             position: absolute;
             cursor: move;
         }
+
+        /* Button Styling */
+        .styled-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            top: 7px;
+            left:80%
+        }
+
+        .styled-button:hover {
+            background-color: #45a049;
+        }
     </style>
+    <!-- Button triggering the action -->
+    <button id="myButton" class="styled-button" onclick="performAction()">Generate Excel</button>
+
+
+    <script>
+        function performAction() {
+            $.ajax({
+                url: '@Url.Action("GenerateReport", "Home")',
+                type: 'POST',
+                success: function (response) {
+                    if (response.success) {
+                        // Show the popup message
+                        alert('Report Generated');
+                    } else {
+                        alert('Action failed.');
+                    }
+                },
+                error: function () {
+                    alert('There was an error processing your request.');
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div id="canvas">

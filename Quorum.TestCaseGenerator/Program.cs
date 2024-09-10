@@ -13,6 +13,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 builder.Services.AddScoped<PersonService>();
+builder.Services.AddScoped<HomeService>();
+
 
 var app = builder.Build();
 

@@ -56,7 +56,7 @@ namespace Quorum.TestCaseGenerator.Service.Services
         public async Task Remove(Person person)
         {
             ExcelExport_Service exportService = new ExcelExport_Service(_configuration,_context);
-            await exportService.ExportToExcelAsync("Persons");
+            await exportService.ExportToExcelAsync("TestCases");
             _context.Persons.Remove(person);
             await _context.SaveChangesAsync();
         }

@@ -21,13 +21,14 @@ namespace Quorum.TestCaseGenerator.Models
         public virtual DbSet<ControlMasterIp> ControlMasterIps { get; set; } = null!;
         public virtual DbSet<IpTypeMaster> IpTypeMasters { get; set; } = null!;
         public virtual DbSet<Person> Persons { get; set; } = null!;
+        public virtual DbSet<TestCase> TestCases { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=AP-EU40OUVMMTQA\\SQLEXPRESS;Initial Catalog=QRM_TST_GENERATOR; Integrated Security=true");
+                optionsBuilder.UseSqlServer("Server=tcp:sqlhaqthon.database.windows.net,1433;Initial Catalog=testcasegen;Persist Security Info=False;User ID=adminpratik;Password=Admin@pratik1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
@@ -90,6 +91,19 @@ namespace Quorum.TestCaseGenerator.Models
                 entity.Property(e => e.LastName)
                     .HasMaxLength(255)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TestCase>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ExpectedResult)
+                    .HasColumnType("text")
+                    .HasColumnName("EXPECTED_RESULT");
+
+                entity.Property(e => e.Step)
+                    .HasColumnType("text")
+                    .HasColumnName("STEP");
             });
 
             OnModelCreatingPartial(modelBuilder);

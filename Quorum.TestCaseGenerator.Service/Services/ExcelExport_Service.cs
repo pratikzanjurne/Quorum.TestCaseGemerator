@@ -5,6 +5,7 @@ using Quorum.TestCaseGenerator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace Quorum.TestCaseGenerator.Service.Services
             // Use reflection to get the DbSet from the DbContext
             try
             {
-                var dbSet = _context.GetType().GetProperty(tableName)?.GetValue(_context) as IQueryable<object>;
+                var dbSet = _context.GetType().GetProperty(tableName , BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance)?.GetValue(_context) as IQueryable<object>;
 
                 if (dbSet == null)
                 {
