@@ -1,0 +1,71 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#container {
+    background-color: #212228;
+    background-image: linear-gradient(#292a30 0.1em, transparent 0.1em), linear-gradient(90deg, #292a30 0.1em, transparent 0.1em);
+    background-size: 4em 4em;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Toolbox container */
+#toolbox {
+    display: flex;
+    flex-direction: column;
+    background-color: #2F3136;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 20px;
+    width: 150px;
+    height: auto;
+}
+
+/* Common styles for all shapes */
+.shape {
+    width: 100px;
+    height: 100px;
+    background-color: #AFDA9F;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Specific shapes */
+#diamond {
+    transform: rotate(45deg);
+}
+
+#rectangle {
+    width: 150px;
+    height: 80px;
+}
+
+#triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #AFDA9F;
+    background-color: transparent;
+}
+
+#circle {
+    border-radius: 50%;
+}
+
+/* Line styles */
+.line {
+    width: 5px;
+    height: 150px;
+    background-color: #AFDA9F;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transform-origin: top;
+    position: relative;
+}
